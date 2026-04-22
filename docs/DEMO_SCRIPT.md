@@ -1,96 +1,77 @@
-ill attach their # FairLens — Demo Script (3-Minute Video)
+# FairLens — Demo Script (3-Minute Video)
 
 > **Target:** Google Solutions Challenge 2026  
 > **SDG Alignment:** SDG 10 (Reduced Inequalities), SDG 16 (Peace, Justice & Strong Institutions)
+> **Theme:** "Algorithms shouldn't decide who gets left behind."
 
 ---
 
-## Opening (0:00 – 0:20) — The Problem
+## Act 1: The Human Cost (0:00 – 0:35)
 
-**Narration:** *"AI systems deployed in banking, healthcare, and HR are making decisions that affect millions of lives. But these models often encode historical biases — denying loans, filtering resumes, and triaging patients unfairly across racial, gender, and age groups."*
+**Visual:** Fade in on a blurred, fast-paced montage of people looking at phones and laptops—some smiling, some distressed. The screen pauses on a rejected loan application. 
 
-**Visual:** Show a brief montage of headlines about AI bias in lending and hiring.
+**Narration:** *"Meet Sarah. She was just denied a critical medical loan. Not because of her credit history, but because a machine learning model found a hidden statistical proxy for her demographic. The engineers who built this model had the best intentions, but they had no idea it was biased."*
 
----
+**Visual:** Text on screen: **AI bias isn't just a technical glitch. It's a human crisis.**
 
-## Demo Step 1 (0:20 – 0:40) — The SDK
-
-**Narration:** *"FairLens is an end-to-end AI governance platform. It starts with a Python SDK that computes 8 fairness metrics in a single call."*
-
-**Visual:** Terminal showing:
-```python
-import fairlens
-report = fairlens.audit(df, label_col="approved", protected_cols=["race", "gender"])
-print(report)  # → AuditReport: 2/8 metrics FAILING
-```
+**Narration:** *"As AI takes over hiring, healthcare, and finance, algorithms are deciding who gets an opportunity and who gets left behind. That is why we built **FairLens**—an enterprise-grade AI governance platform designed to detect, explain, and eliminate algorithmic bias before it ruins lives."*
 
 ---
 
-## Demo Step 2 (0:40 – 1:10) — The Console
+## Act 2: The Discovery (0:35 – 1:10)
 
-**Narration:** *"The Governance Console gives risk teams real-time visibility across all deployed models."*
+**Visual:** Quick cut to a developer's IDE (VS Code). Typing a single line of Python code.
 
-**Visual:** Walk through these screens:
-1. **Dashboard** — Show 5 models monitored, 4 active incidents, 0.78 avg equity score
-2. **Model Registry** — Click on "Loan Approval Engine" → show failing status, equity bars
-3. **Model Detail** — Radar chart showing 8 metrics, 30-day trend line, SHAP heatmap
+**Narration:** *"For engineering teams, finding these biases used to be like finding a needle in a haystack. But with the FairLens Python SDK, it takes just one line of code to compute eight industry-standard fairness metrics."*
 
----
+**Visual:** Transition from the terminal to the **FairLens Governance Console**. The camera pans across the Dashboard. It zooms in on a red alert for the "Loan Approval Engine."
 
-## Demo Step 3 (1:10 – 1:40) — Incident Response
-
-**Narration:** *"When a fairness threshold is breached, FairLens automatically generates remediation playbooks powered by Gemini."*
-
-**Visual:**
-1. **Incident Log** — Show INC-8921 (Loan Origination, Critical severity)
-2. Click **"Playbook"** button → slide panel opens
-3. Show 3 strategies: Threshold Adjustment (Low effort), Reweighting (Medium), Feature Excision (High)
-4. Click **"Approve & Execute"** → toast notification confirms
+**Narration:** *"Instead of finding out about the bias when someone like Sarah complains, the risk team sees this critical alert on the FairLens Console instantly. We can see exactly where the model is failing—in this case, the Equal Opportunity metric is severely violating our thresholds."*
 
 ---
 
-## Demo Step 4 (1:40 – 2:10) — Compliance
+## Act 3: The Resolution (1:10 – 1:50)
 
-**Narration:** *"Every audit is cryptographically signed with Cloud KMS and stored as an immutable compliance artifact."*
+**Visual:** The user clicks into the Incident. The screen shows the "Root Cause Analysis" and the "Generate Playbook" button. The user clicks it.
 
-**Visual:**
-1. **Compliance Ledger** — Show 4 reports with KMS signatures and SHA-256 hashes
-2. Click **"Generate Report"** → select EU AI Act framework
-3. Show generated PDF with compliance sections
+**Narration:** *"Knowing a model is biased is only half the battle. How do you fix a complex, black-box algorithm without destroying its accuracy? This is where FairLens shines. Powered by Google's Gemini, FairLens automatically generates a remediation playbook."*
 
----
+**Visual:** The slide panel opens, revealing step-by-step strategies (Threshold Calibration, Data Reweighting). The user clicks "Approve & Execute."
 
-## Demo Step 5 (2:10 – 2:40) — The Pipeline
-
-**Narration:** *"FairLens integrates directly into CI/CD pipelines as a fairness gate. If a model fails the 4/5ths rule, the deployment is automatically blocked."*
-
-**Visual:** Show GitHub Actions workflow with:
-- ✅ `fair-model` → gate passes, deploy succeeds
-- ❌ `biased-model` → gate fails, PR is blocked with violation details
+**Narration:** *"Gemini explains exactly *why* the model is biased—pointing out the specific proxy variables—and provides actionable, mathematically sound strategies to fix it. With a single click, the team approves the playbook, the model is adjusted, and fairness is restored."*
 
 ---
 
-## Closing (2:40 – 3:00) — Impact & Architecture
+## Act 4: The Promise (1:50 – 2:20)
 
-**Narration:** *"FairLens is built entirely on Google Cloud — BigQuery for analytics, Vertex AI for serving, Gemini for explainability, and Cloud Run for scalable deployment. Together, these tools make AI governance accessible to every organization."*
+**Visual:** Show the "Compliance" tab. A PDF report is generated. A lock icon appears, indicating cryptographic signing via Cloud KMS. 
 
-**Visual:** Architecture diagram showing:
-- SDK → Scanner (Dataflow) → Gate (CI/CD) → Console (Cloud Run)
-- BigQuery ↔ Gemini → Compliance Reports
-- Cloud KMS → Spanner (audit trail)
+**Narration:** *"But we need to ensure this never happens to anyone else. FairLens cryptographically signs a comprehensive compliance report using Google Cloud KMS, proving to regulators that the model meets the EU AI Act standards."*
+
+**Visual:** Show a GitHub PR being automatically blocked by a red `fairlens-gate` check.
+
+**Narration:** *"And to prevent future bias, FairLens integrates directly into the CI/CD pipeline. If a developer accidentally pushes a biased model update tomorrow, the deployment is automatically blocked. Fairness isn't an afterthought; it's a structural guarantee."*
 
 ---
 
-## GCP Services Used
+## Act 5: The Vision (2:20 – 3:00)
 
-| Service | Purpose |
+**Visual:** A clean, animated architecture diagram showing BigQuery, Cloud Run, Vertex AI, and Gemini working together seamlessly.
+
+**Narration:** *"FairLens is built entirely on Google Cloud—utilizing BigQuery for massive analytics, Cloud Run for scalable deployment, and Gemini for deep explainability."*
+
+**Visual:** Cut back to the human element—a montage of diverse individuals succeeding (getting a home keys, shaking hands for a job). Fade to the FairLens Logo.
+
+**Narration:** *"When we build AI, we aren't just building software. We are building the infrastructure of human opportunity. With FairLens, we can ensure that future is fair, transparent, and equitable for everyone. Thank you."*
+
+---
+
+## Production Notes & GCP Services Used
+
+| Service | Purpose in Demo |
 |---------|---------|
-| BigQuery | Audit report storage, metric analytics |
-| Cloud Run | Console frontend + API backend |
-| Vertex AI | Model endpoint monitoring |
-| Gemini | Playbook generation, SHAP explanations |
-| Cloud KMS | Compliance report signing |
-| Pub/Sub | Event-driven scan triggers |
-| Cloud Build | CI/CD fairness gate |
-| Spanner | Immutable compliance ledger |
-| Dataflow | Bias scanner pipeline |
+| **BigQuery** | Stores the massive audit logs and telemetry data |
+| **Cloud Run** | Hosts the React frontend and FastAPI backend |
+| **Gemini** | Powers the automated root-cause analysis and playbooks |
+| **Cloud KMS** | Cryptographically signs the compliance PDFs for legal immutability |
+| **Cloud Build** | Runs the CI/CD pipeline fairness gate |

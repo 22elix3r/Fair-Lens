@@ -121,6 +121,7 @@ fairlens/
 
 ## 🔗 Demo & Documentation
 
+- **[Demo Script (Emotional Storytelling)](docs/DEMO_SCRIPT.md)** — The 3-minute pitch structure for the Hackathon.
 - **Local demo (no GCP):** `python scripts/demo.py`
 - **GCP demo:** `bash scripts/demo_gcp.sh`
 - [Problem Statement](docs/PROBLEM_STATEMENT.md)
