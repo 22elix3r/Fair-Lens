@@ -10,7 +10,7 @@
 
 ---
 
-## 🌍 SDG Alignment
+##  SDG Alignment
 
 ### SDG 10 — Reduced Inequalities
 Algorithmic decision systems in hiring, lending, and healthcare disproportionately impact marginalized communities. FairLens directly addresses this by embedding fairness metrics into the ML lifecycle — ensuring AI systems treat all demographic groups equitably.
@@ -20,7 +20,7 @@ The EU AI Act mandates bias auditing for high-risk AI. EEOC guidelines require a
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -65,7 +65,7 @@ The EU AI Act mandates bias auditing for high-risk AI. EEOC guidelines require a
 
 ---
 
-## 🚀 Quick Start (3 Commands)
+##  Quick Start (3 Commands)
 
 ```bash
 # 1. Clone and setup
@@ -82,7 +82,7 @@ make test-p0
 
 ---
 
-## 📋 Feature Matrix
+##  Feature Matrix
 
 | # | Deliverable | Phase | Component | Status |
 |---|-------------|-------|-----------|--------|
@@ -100,7 +100,7 @@ make test-p0
 
 ---
 
-## 📂 Repository Structure
+##  Repository Structure
 
 ```
 fairlens/
@@ -119,16 +119,7 @@ fairlens/
 
 ---
 
-## 🔗 Demo & Documentation
 
-- **[Demo Script (Emotional Storytelling)](docs/DEMO_SCRIPT.md)** — The 3-minute pitch structure for the Hackathon.
-- **Local demo (no GCP):** `python scripts/demo.py`
-- **GCP demo:** `bash scripts/demo_gcp.sh`
-- [Problem Statement](docs/PROBLEM_STATEMENT.md)
-- [Architecture](docs/ARCHITECTURE.md)
-- [Impact Metrics](docs/IMPACT_METRICS.md)
-
----
 
 ## License
 
