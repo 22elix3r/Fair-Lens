@@ -118,7 +118,7 @@ export default function ModelRegistry() {
             <table className="w-full text-left border-collapse whitespace-nowrap">
               <thead>
                 <tr className="bg-surface-container-low">
-                  {["Model Name", "Version", "Provider", "Protected Attrs", "Equity Score", "Status", "Actions"].map((h, i) => (
+                  {["Model Name", "Version", "Protected Attrs", "Equity Score", "EBI Score", "Status", "Actions"].map((h, i) => (
                     <th key={i} className={`py-3 px-5 font-label-sm text-label-sm text-on-surface-variant font-medium tracking-wider uppercase ${i === 6 ? "text-right" : ""}`}>
                       {h}
                     </th>
@@ -137,12 +137,7 @@ export default function ModelRegistry() {
                             className="hover:bg-surface-container-low transition-colors cursor-pointer group"
                           >
                             <td className="py-4 px-5 text-white font-medium">{m.name}</td>
-                            <td className="py-4 px-5">
-                              <span className="bg-surface-container-high font-code text-code px-2 py-0.5 rounded text-on-surface-variant">
-                                {m.version}
-                              </span>
-                            </td>
-                            <td className="py-4 px-5 text-on-surface-variant">{m.provider}</td>
+                            <td className="py-4 px-5 text-on-surface-variant font-code">{m.version}</td>
                             <td className="py-4 px-5">
                               <div className="flex gap-1 flex-wrap">
                                 {(m.sensitive_cols ?? []).map((c: string) => (
@@ -154,13 +149,27 @@ export default function ModelRegistry() {
                             </td>
                             <td className="py-4 px-5">
                               <div className="flex items-center gap-2">
-                                <div className="w-20 bg-surface-container-high rounded-full h-2">
+                                <div className="w-16 bg-surface-container-high rounded-full h-1.5">
                                   <div
-                                    className={`h-2 rounded-full ${m.equity_score >= 0.85 ? "bg-primary" : m.equity_score >= 0.75 ? "bg-secondary" : "bg-error"}`}
+                                    className={`h-1.5 rounded-full ${m.equity_score >= 0.85 ? "bg-[#10a37f]" : m.equity_score >= 0.75 ? "bg-[#f59e0b]" : "bg-[#ef4444]"}`}
                                     style={{ width: `${(m.equity_score ?? 0) * 100}%` }}
                                   />
                                 </div>
-                                <span className="font-code text-code text-on-surface">{(m.equity_score ?? 0).toFixed(2)}</span>
+                                <span className="font-code text-xs text-on-surface">{(m.equity_score ?? 0).toFixed(2)}</span>
+                              </div>
+                            </td>
+                            <td className="py-4 px-5">
+                              <div className="flex items-center gap-2">
+                                <span className="font-code text-xs font-bold" style={{ color: m.ebi_score >= 90 ? "#10a37f" : m.ebi_score >= 75 ? "#f59e0b" : "#ef4444" }}>
+                                  {Math.round(m.ebi_score ?? 0)}
+                                </span>
+                                <span className={`text-[9px] px-1.5 py-0.5 rounded-full border font-bold ${
+                                  m.risk_tier === 'GREEN' ? 'border-[#10a37f] text-[#10a37f]' :
+                                  m.risk_tier === 'AMBER' ? 'border-[#f59e0b] text-[#f59e0b]' :
+                                  'border-[#ef4444] text-[#ef4444]'
+                                }`}>
+                                  {m.risk_tier}
+                                </span>
                               </div>
                             </td>
                             <td className="py-4 px-5">

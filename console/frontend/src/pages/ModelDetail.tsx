@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useModelAudit, useModels } from "../api/hooks";
+import { useModelAudit, useModels, useEBI } from "../api/hooks";
+import { EBIWidget } from "../components/EBIWidget";
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 const formatMetric = (name: string) =>
@@ -23,6 +24,7 @@ export default function ModelDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data: audit, isLoading: auditLoading } = useModelAudit(id!);
+  const { data: ebiData } = useEBI(id!);
   const { data: models } = useModels();
   const model = models?.find((m) => m.model_id === id);
 
@@ -123,6 +125,13 @@ export default function ModelDetail() {
             </div>
           </div>
         </div>
+
+        {/* EBI Widget */}
+        {ebiData && (
+          <div className="mb-lg">
+            <EBIWidget data={ebiData} />
+          </div>
+        )}
 
         {/* Loading */}
         {auditLoading && (

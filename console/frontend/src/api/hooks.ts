@@ -26,6 +26,19 @@ export const useModelAudit = (modelId: string) =>
     enabled: !!modelId,
   });
 
+export const useEBI = (modelId: string) =>
+  useQuery<any>({
+    queryKey: ["ebi", modelId],
+    queryFn: () => api.get<any>(`/v1/models/${modelId}/bias-index`),
+    enabled: !!modelId,
+  });
+
+export const useBenchmarks = () =>
+  useQuery<any>({
+    queryKey: ["benchmarks"],
+    queryFn: () => api.get<any>("/v1/reports/benchmarks"),
+  });
+
 export const useIncidents = (filters?: {
   status?: string;
   severity?: string;

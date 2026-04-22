@@ -7,6 +7,7 @@ import ModelDetail from "./pages/ModelDetail";
 import Incidents from "./pages/Incidents";
 import ModelRegistry from "./pages/ModelRegistry";
 import Compliance from "./pages/Compliance";
+import Benchmarks from "./pages/Benchmarks";
 import Login from "./pages/Login";
 
 function AppRoutes() {
@@ -46,6 +47,10 @@ function AppRoutes() {
 
       <Route path="/compliance" element={
         user ? <Layout><Compliance /></Layout> : <Navigate to="/login" replace />
+      } />
+
+      <Route path="/benchmarks" element={
+        user ? <Layout><Benchmarks /></Layout> : <Navigate to="/login" replace />
       } />
 
       <Route path="*" element={<Navigate to="/" replace />} />

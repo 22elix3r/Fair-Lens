@@ -71,6 +71,7 @@ export default function Dashboard() {
     { label: "Avg. Equity Score", value: avgEquity.toFixed(2), icon: "balance", iconColor: "text-primary",
       badge: avgEquity >= 0.85 ? "Healthy" : avgEquity >= 0.75 ? "Marginal" : "At Risk",
       badgeClass: avgEquity >= 0.85 ? "bg-primary/10 text-primary" : avgEquity >= 0.75 ? "bg-surface-container text-secondary" : "bg-error-container text-on-error-container" },
+    { label: "Avg. Bias Index", value: Math.round(models.reduce((s: number, m: any) => s + (m.ebi_score ?? 0), 0) / (models.length || 1)), icon: "shield", iconColor: "text-[#10a37f]" },
     { label: "Compliance Coverage", value: "94%", icon: "verified", iconColor: "text-primary" },
   ];
 
@@ -157,16 +158,25 @@ export default function Dashboard() {
                   <span className="text-body-md text-on-surface-variant w-48 truncate group-hover:text-white transition-colors">
                     {m.name}
                   </span>
-                  <div className="flex-1 bg-surface-container-high rounded-full h-6 overflow-hidden">
+                  <div className="flex-1 bg-surface-container-high rounded-full h-6 overflow-hidden flex relative">
                     <div
-                      className={`h-full ${barColor(m.equity_score)} rounded-full transition-all duration-500 flex items-center justify-end pr-2`}
+                      className={`h-full ${barColor(m.equity_score)} transition-all duration-500 flex items-center justify-end pr-2`}
                       style={{ width: `${(m.equity_score ?? 0) * 100}%` }}
                     >
-                      <span className="text-[11px] font-semibold text-black/80">
-                        {(m.equity_score ?? 0).toFixed(2)}
+                      <span className="text-[10px] font-semibold text-black/80">
+                        EQ: {(m.equity_score ?? 0).toFixed(2)}
                       </span>
                     </div>
+                    {/* EBI Marker */}
+                    <div 
+                      className="absolute top-0 bottom-0 w-0.5 bg-white shadow-[0_0_5px_rgba(255,255,255,0.8)] z-10"
+                      style={{ left: `${(m.ebi_score ?? 0)}%` }}
+                      title={`EBI: ${Math.round(m.ebi_score)}`}
+                    />
                   </div>
+                  <span className="font-code text-xs font-bold w-12 text-right" style={{ color: m.ebi_score >= 90 ? "#10a37f" : m.ebi_score >= 75 ? "#f59e0b" : "#ef4444" }}>
+                    {Math.round(m.ebi_score ?? 0)}
+                  </span>
                 </div>
               ))}
             </div>
