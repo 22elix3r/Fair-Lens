@@ -4,8 +4,5 @@
   ],
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "framework": "vite",
-  "env": {
-    "VITE_API_URL": "@fairlens-api-url"
-  }
+  "framework": "vite"
 }

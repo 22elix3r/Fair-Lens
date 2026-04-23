@@ -91,10 +91,16 @@ def seed_db():
         }
 
         c.execute("""
-            INSERT OR REPLACE INTO audit_reports VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+            INSERT OR REPLACE INTO audit_reports
+            (report_id, model_id, name, version, created_at, protected_cols, metrics,
+             threshold_policy, passed, triggered_by, provider, intended_purpose, equity_score,
+             violations_count, trend)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
         """, (
             f"rpt-{m['model_id']}-latest",
             m["model_id"],
+            m.get("name", m["model_id"]),
+            m.get("version", "v1.0"),
             now.isoformat() + "Z",
             json.dumps(m["sensitive_cols"]),
             json.dumps(metrics),
