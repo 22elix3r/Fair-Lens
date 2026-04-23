@@ -37,14 +37,21 @@ class FairLensDB:
     
     def get_models(self) -> List[Dict]:
         if self.local:
+            # Local SQLite: Get latest audit for each model, joined with latest EBI score
             rows = self.conn.execute("""
-                SELECT ar.*, bis.enterprise_bias_index as ebi_score, bis.risk_tier
+                SELECT 
+                    ar.*, 
+                    bis.enterprise_bias_index as ebi_score, 
+                    bis.risk_tier,
+                    bis.percentile_rank
                 FROM audit_reports ar
-                LEFT JOIN (
-                    SELECT model_id, enterprise_bias_index, risk_tier,
-                           ROW_NUMBER() OVER (PARTITION BY model_id ORDER BY computed_at DESC) as rn
-                    FROM bias_index_scores
-                ) bis ON ar.model_id = bis.model_id AND bis.rn = 1
+                LEFT JOIN bias_index_scores bis ON ar.model_id = bis.model_id
+                WHERE ar.report_id IN (
+                    SELECT MAX(report_id) FROM audit_reports GROUP BY model_id
+                )
+                AND (bis.computed_at IS NULL OR bis.computed_at = (
+                    SELECT MAX(computed_at) FROM bias_index_scores WHERE model_id = ar.model_id
+                ))
                 ORDER BY ar.equity_score ASC
             """).fetchall()
             return [self._parse_model_row(r) for r in rows]
@@ -173,7 +180,7 @@ class FairLensDB:
         r['trend'] = json.loads(r.get('trend') or '[]')
         r['ebi_score'] = r.get('ebi_score') or 0
         r['passed'] = bool(r['passed'])
-
+        
         # Derive specific violations for the UI
         violations = []
         thresholds = {
@@ -182,7 +189,7 @@ class FairLensDB:
             "disparate_impact_ratio": 0.8,
             "statistical_parity_difference": 0.1
         }
-
+        
         for metric, groups in metrics.items():
             threshold = thresholds.get(metric, 0.1)
             for group, val in groups.items():
@@ -190,7 +197,7 @@ class FairLensDB:
                 failed = val < threshold if is_ratio else val > threshold
                 if failed:
                     violations.append({
-                        "col": "multiple",
+                        "col": "multiple", # Simplification for local mode
                         "metric": metric,
                         "value": val,
                         "threshold": threshold

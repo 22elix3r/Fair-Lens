@@ -300,7 +300,7 @@ export default function Incidents() {
               const isRecommended = i === 0;
               // AUTO-EXPAND the first strategy, or use manual toggle
               const isExpanded = expandedStrategy === null ? isRecommended : expandedStrategy === i;
-
+              
               return (
                 <div
                   key={i}

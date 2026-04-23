@@ -8,7 +8,7 @@ Usage:
     import fairlens
 
     report = fairlens.audit(model, X_test, y_test, sensitive_cols=["gender", "race"])
-
+    
     # Remediate bias using Synthetic Data Debiaser (D8)
     X_balanced = fairlens.debias(X_train, target_col="loan_status", sensitive_cols=["race"])
 """

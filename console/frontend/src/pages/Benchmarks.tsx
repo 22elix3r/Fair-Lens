@@ -12,7 +12,7 @@ export default function Benchmarks() {
   return (
     <div className="flex-1 p-lg overflow-y-auto">
       <div className="max-w-[1200px] mx-auto w-full">
-
+        
         {/* Header */}
         <div className="mb-lg">
           <h1 className="text-3xl font-bold text-white">Industry Benchmarking</h1>
@@ -39,12 +39,12 @@ export default function Benchmarks() {
               </div>
             </div>
           </div>
-
+          
           <div className="flex-1">
             <h3 className="text-xl font-semibold text-white mb-2">Portfolio Performance</h3>
             <p className="text-sm text-[#b4b4b4] leading-relaxed">
-              Your organization's current Enterprise Bias Index is <span className="text-white font-bold">{Math.round(avgEbi)}</span>.
-              This places you in the <span className="text-[#10a37f] font-bold">top 15%</span> of Fintech respondents globally.
+              Your organization's current Enterprise Bias Index is <span className="text-white font-bold">{Math.round(avgEbi)}</span>. 
+              This places you in the <span className="text-[#10a37f] font-bold">top 15%</span> of Fintech respondents globally. 
               You are currently outperforming the BFSI sector average by 12 points.
             </p>
             <div className="mt-6 flex gap-4">
@@ -149,7 +149,7 @@ export default function Benchmarks() {
                    <p className="text-sm text-[#b4b4b4]">Export certified industry comparison for ESG reporting.</p>
                 </div>
               </div>
-              <button
+              <button 
                 onClick={() => window.open(`${import.meta.env.VITE_API_URL ?? "/api"}/v1/reports/generate?model_id=global_benchmarks&framework=esg`, "_blank")}
                 className="w-full py-3 bg-white text-black font-bold rounded-lg hover:bg-[#e2e8f0] transition-colors"
               >

@@ -30,8 +30,8 @@ async def generate_compliance_report(
 ):
     """Generate a signed PDF compliance report."""
     # Simulate processing time for effect
-    time.sleep(1)
-
+    time.sleep(1) 
+    
     with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
         c = canvas.Canvas(tmp.name, pagesize=letter)
         c.setFont("Helvetica-Bold", 24)
@@ -40,11 +40,11 @@ async def generate_compliance_report(
         c.drawString(100, 680, f"Model ID: {model_id}")
         c.drawString(100, 660, f"Regulatory Framework: {framework.upper()}")
         c.drawString(100, 640, f"Generated At: {time.ctime()}")
-
+        
         c.line(100, 630, 500, 630)
         c.drawString(100, 610, "Status: COMPLIANT (EBI: 82.4)")
         c.drawString(100, 590, "Signature: SHA-256: 8f3a...d9e1 (Anchored to Cloud KMS)")
-
+        
         c.save()
         return FileResponse(
             path=tmp.name,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useModels, useIncidents } from "../api/hooks";
 import { SkeletonCard, SkeletonRow, ErrorBanner } from "../components/Skeleton";
@@ -112,7 +112,7 @@ export default function Dashboard() {
                   Critical bias detected in production build. Deployment halted automatically.
                 </p>
                 <div className="mt-3 flex gap-2">
-                  <button
+                  <button 
                     onClick={() => { setShowSOS(false); navigate("/incidents"); }}
                     className="bg-[#d13438] text-white text-[12px] font-bold px-3 py-1.5 rounded hover:bg-[#a4262c] transition-colors"
                   >
