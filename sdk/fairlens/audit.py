@@ -49,15 +49,23 @@ def audit(
 
     violations = _check_thresholds(results, thresholds)
     
+    # Pivot metrics from {col: {metric: val}} to {metric: {col: val}} for EBI
+    pivoted_metrics = {}
+    for col, col_metrics in results.items():
+        for metric, val in col_metrics.items():
+            if metric not in pivoted_metrics:
+                pivoted_metrics[metric] = {}
+            pivoted_metrics[metric][col] = val
+
     from .bias_index import compute_ebi
     ebi_result = compute_ebi(
-        metrics=results,
+        metrics=pivoted_metrics,
         trend=[], # Populated by monitor in production
         sensitive_cols=sensitive_cols
     )
 
     return AuditReport(
-        metrics=results, thresholds=thresholds, violations=violations,
+        metrics=pivoted_metrics, thresholds=thresholds, violations=violations,
         sensitive_cols=sensitive_cols, triggered_by=triggered_by, model_id=model_id,
         ebi=ebi_result
     )
